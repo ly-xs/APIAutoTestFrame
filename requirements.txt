@@ -1,0 +1,7 @@
+ddt==1.4.4
+Flask==3.0.3
+Flask-SQLAlchemy==2.5.1
+openpyxl==3.0.9
+PyMySQL==1.1.1
+Requests==2.32.2
+SQLAlchemy==1.4.41
