@@ -4,7 +4,7 @@ import time
 import unittest
 
 sys.path.append(os.path.dirname(__file__))
-from db_fixture import test_data
+from common.mysqlDB import MySQLDatabase
 from common.HTMLTestRunner import HTMLTestRunner
 from common.sendmail import send_mail
 from config.config import TEST_REPORT_DIR, TEST_DIR
@@ -14,7 +14,7 @@ def run_case(test_path=TEST_DIR, result_path=TEST_REPORT_DIR):
     """执行所有的测试用例"""
 
     # 初始化接口测试数据
-    test_data.init_data()
+    MySQLDatabase().init_data()
 
     now = time.strftime("%Y-%m-%d %H_%M_%S")
     filename = f'{result_path}/{now}result.html'
