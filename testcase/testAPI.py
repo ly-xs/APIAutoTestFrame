@@ -19,7 +19,7 @@ class Demo_API(unittest.TestCase):
     """发布会系统"""
 
     def setUp(self):
-        self.s = requests.session()
+        self.session = requests.session()
 
     def tearDown(self):
         pass
@@ -33,7 +33,7 @@ class Demo_API(unittest.TestCase):
         print(f"请求参数: {excel_data['params']}")
         print(f"post请求body类型为：{excel_data['type']} ,body内容为：{excel_data['body']}")
         # 发送请求
-        re = send_requests(self.s, excel_data)
+        re = send_requests(self.session, excel_data)
         # 获取服务端返回的值
         self.result = re.json()
         print(f"页面返回信息：{re.content.decode()}")
