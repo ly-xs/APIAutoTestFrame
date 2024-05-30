@@ -21,10 +21,20 @@ def run_case(test_path=TEST_DIR, result_path=TEST_REPORT_DIR):
     with open(filename, 'wb') as f:
         runner = HTMLTestRunner(stream=f, title='发布会系统接口自动化测试报告', description='环境：windows 10')
         runner.run(unittest.defaultTestLoader.discover(test_path, pattern='*API.py'))
+
+    # 删除超过五个的报告
+    log_files = sorted(
+        (os.path.join(result_path, f) for f in os.listdir(result_path) if f.endswith('.html')),
+        key=os.path.getmtime
+    )
+    while len(log_files) > 5:
+        os.remove(log_files.pop(0))
+
+    # 调用发送邮件模块
     lists = os.listdir(result_path)
     lists.sort(key=lambda fn: os.path.getmtime(result_path + "\\" + fn))
     report = os.path.join(result_path, lists[-1])
-    send_mail(report)  # 调用发送邮件模块
+    send_mail(report)
 
 
 if __name__ == "__main__":
